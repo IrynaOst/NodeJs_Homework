@@ -1,3 +1,5 @@
 module.exports = (req, res) => {
-    const {password, email} = req.body;
+    const user = req.user;
+  
+    res.redirect(`/users/${user.id}`)
 }
