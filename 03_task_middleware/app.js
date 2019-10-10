@@ -21,8 +21,6 @@ const { user: userMiddleware } = require('./middleware');
 
 const { house: houseMiddleware } = require('./middleware');
 
-const { provider } = require('./dataBase');
-
 app.get('/', (req, res) => {
     res.render('index')
 });
@@ -51,7 +49,7 @@ app.post('/users', userMiddleware.checkUserValidityMiddleware, user.createUser);
 app.get('/users/:userId', userMiddleware.isUserPresentMiddleware, user.getById);
 app.post('/auth', userMiddleware.isUserInDBMiddleware, user.getUserInDB);
 
-app.post('/house', house.createHouse);
+app.post('/house', houseMiddleware.checkHouseValidityMiddleware, house.createHouse);
 app.get('/houses/:houseId', houseMiddleware.isHousePresentMiddleware, house.getById);
 
 app.all('*', async (req, res) => {
