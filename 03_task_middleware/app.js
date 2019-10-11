@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.render('index')
 });
 
-app.get('/auth', (req, res) => {
+app.get('/users/auth', (req, res) => {
     res.render('login');
 });
 app.get('/users', (req, res) => {
@@ -33,7 +33,7 @@ app.get('/users', (req, res) => {
 app.get('/profile', (req, res) => {
     res.render('profile')
 })
-app.get('/userEdit', (req, res) => {
+app.get('/users/update', (req, res) => {
     res.render('updateUser')
 })
 
@@ -43,19 +43,18 @@ app.get('/houses', (req, res) => {
 app.get('/houseProfile', (req, res) => {
     res.render('houseProfile')
 })
-app.get('/houseEdit', (req, res) => {
+app.get('/houses/update', (req, res) => {
     res.render('updateHouse')
 })
 
 app.get('/users/:userId', userMiddleware.isUserPresentMiddleware, user.getById);
 app.post('/users', userMiddleware.checkUserValidityMiddleware, user.createUser);
-app.post('/user', userMiddleware.checkUserValidityMiddleware, userMiddleware.isEditUserPresentMiddleware, user.updateUser);
-app.post('/auth', userMiddleware.isUserInDBMiddleware, user.getUserInDB);
-
+app.post('/users/update', userMiddleware.checkUserValidityMiddleware, userMiddleware.isEditUserPresentMiddleware, user.updateUser);
+app.post('/users/auth', userMiddleware.isUserInDBMiddleware, user.getUserInDB);
 
 app.get('/houses/:houseId', houseMiddleware.isHousePresentMiddleware, house.getById);
 app.post('/houses', houseMiddleware.checkHouseValidityMiddleware, house.createHouse);
-app.post('/house', houseMiddleware.checkHouseValidityMiddleware, houseMiddleware.isEditHousePresentMiddleware, house.updateHouse);
+app.post('/houses/update', houseMiddleware.checkHouseValidityMiddleware, houseMiddleware.isEditHousePresentMiddleware, house.updateHouse);
 
 app.all('*', async (req, res) => {
     res.status(404).json('404. NOT FOUND! SORRY...');
