@@ -7,16 +7,14 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         user_id: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: false
+            type: DataTypes.STRING
         },
         square: {
             type: DataTypes.DOUBLE,
             allowNull: false
         },
         city: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING
         },
         price: {
             type: DataTypes.DOUBLE,

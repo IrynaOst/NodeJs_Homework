@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
         const {userId} = req.params;
         const UserModel = dataBase.getModel('User');
 
-        let isUserPresent = await UserModel.findByPk(userId);
+        const isUserPresent = await UserModel.findByPk(userId);
 
         if (!isUserPresent) {
             throw new Error(`User with ID ${userId} is not present`);

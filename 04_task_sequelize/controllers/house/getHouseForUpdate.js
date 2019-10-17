@@ -1,8 +1,8 @@
 module.exports =  (req, res) => {
     try {
-        const user = req.user;
+        const house = req.house;
 
-        res.render(`updateUser`, user);
+        res.render(`updateHouse`, house);
     } catch (e) {
         res.json(e.message);
     }

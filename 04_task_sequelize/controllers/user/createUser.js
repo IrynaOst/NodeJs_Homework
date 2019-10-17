@@ -6,7 +6,6 @@ module.exports = async (req, res) => {
         const UserModel = dataBase.getModel('User');
 
         const results = await UserModel.create(userToCreate);
-
         let userId = results.dataValues.id;
 
         res.redirect(`users/${userId}`);
