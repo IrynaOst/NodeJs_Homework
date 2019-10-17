@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         user_id: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            foreignKey: true
         },
         square: {
             type: DataTypes.DOUBLE,
@@ -25,5 +26,8 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
     
+    const User = sequelize.import('./User.js');
+    House.belongsTo(User, {foreignKey: 'user_id'});
+
     return House;
 }
