@@ -8,13 +8,12 @@
 </head>
 <body>
     
-    <form action="/users/update" method="post">
+    <form action="/users/edit/{{id}}" method="post">
         <p>User update</p>
-        <input type="text" name="id" placeholder="enter id">
-        <input type="text" name="name" placeholder="enter name">
-        <input type="text" name="password" placeholder="enter password">
-        <input type ="email" name ="email" placeholder="enter email">
-        <button type="submit">Edit</button>
+        <input type="text" name="name" value="{{name}}" placeholder="enter name">
+        <input type="text" name="password" value="{{password}}" placeholder="enter password">
+        <input type ="email" name ="email" value="{{email}}" placeholder="enter email">
+        <button type="submit" value="patch">Edit</button>
     </form>
 
 </body>
