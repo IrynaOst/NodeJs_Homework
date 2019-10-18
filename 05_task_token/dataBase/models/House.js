@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         user_id: {
             type: DataTypes.STRING,
-            foreignKey: true
+            foreignKey: true,
+            allowNull: false
         },
         square: {
             type: DataTypes.DOUBLE,

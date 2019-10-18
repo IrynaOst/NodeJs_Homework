@@ -8,7 +8,7 @@ module.exports = async (email, password) => {
             email,
             password
         },
-        attributes: ['id', 'name', 'email']
+        attributes: ['id']
     })
     
     return user && user.dataValues;

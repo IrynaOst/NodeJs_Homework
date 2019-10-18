@@ -1,22 +1,15 @@
-const dataBase = require('../../dataBase').getInstance();
+const {userService, houseService} = require('../../service');
 
 module.exports = async (req, res) => {
     try {
         const {userId} = req.params;
-        const UserModel = dataBase.getModel('User');
-        const HouseModel = dataBase.getModel('House');
 
-        const users = await HouseModel.findAll({
-            where: {
-                user_id: userId
-            },
-            include: [{
-                model: UserModel,
-                attributes: ['name', 'email', 'id']
-            }]
-        });
+        const houses = await houseService.getHousesByUserId(userId);
+        const user = await userService.getById(userId);
 
-        res.json(users);
+        user.houses = houses;
+
+        res.json(user);
     } catch (e) {
         res.json(e.message)
     }

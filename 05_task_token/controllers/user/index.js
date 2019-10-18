@@ -1,13 +1,15 @@
 const createUser = require('./createUser');
 const getById = require('./getById');
-const getUserInDB = require('./getUserInDB');
+const authUser = require('./authUser');
 const updateUser = require('./updateUser');
-const getUserWithHouseById = require('./getUserWithHouseById')
+const getUserWithHouseById = require('./getUserWithHouseById');
+const deleteUser = require('./deleteUser');
 
 module.exports = {
     createUser,
     getById,
-    getUserInDB,
+    authUser,
     updateUser,
-    getUserWithHouseById
+    getUserWithHouseById,
+    deleteUser
 }

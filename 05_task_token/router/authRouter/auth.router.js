@@ -6,6 +6,6 @@ const {render} = require('../../controllers');
 
 router.get('/', render.auth);
 
-router.post('/users', userMiddleware.authUserMiddleware, user.getUserInDB);
+router.post('/users', userMiddleware.authUserMiddleware, user.authUser);
 
 module.exports = router;
