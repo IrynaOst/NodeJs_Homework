@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
             throw new Error('No token');
         }
 
-        const userFromToken =  tokenVerificator(token);
+        const userFromToken = tokenVerificator(token);
 
         req.user = userFromToken;
 

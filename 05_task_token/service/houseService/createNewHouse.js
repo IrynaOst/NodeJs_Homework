@@ -10,7 +10,6 @@ module.exports = async (newHouse, userId) => {
         city: city,
         square: square,
         price: price
-
     }); 
 
     return newHouseObj && newHouseObj.dataValues.id;

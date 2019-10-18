@@ -1,1 +1,1 @@
-module.exports = require('./house.router.js');
+module.exports = require('./house.router');
