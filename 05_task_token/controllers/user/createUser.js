@@ -1,16 +1,14 @@
-const dataBase = require('../../dataBase').getInstance();
+const {userService} = require('../../service');
 
 module.exports = async (req, res) => {
     try {
         const userToCreate = req.body;
-        const UserModel = dataBase.getModel('User');
 
-        const results = await UserModel.create(userToCreate);
-        let userId = results.dataValues.id;
+        const results = await userService.createNewUser(userToCreate);
+        const userId = results;
 
         res.redirect(`users/${userId}`);
     } catch (e) {
         res.json(e.message);
     }
-    
 }
