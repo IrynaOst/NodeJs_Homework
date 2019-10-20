@@ -1,4 +1,4 @@
-const {userService} = require('../../service');
+const {userService, emailService} = require('../../service');
 
 module.exports = async (req, res) => {
     try {
@@ -7,7 +7,10 @@ module.exports = async (req, res) => {
         const results = await userService.createNewUser(userToCreate);
         const userId = results;
 
+        await emailService.sendEmail(userToCreate.email);
+
         res.redirect(`users/${userId}`);
+
     } catch (e) {
         res.json(e.message);
     }
