@@ -1,0 +1,1 @@
+module.exports.filesCheck = require('./files-check');

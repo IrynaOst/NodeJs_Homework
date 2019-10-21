@@ -1,13 +1,15 @@
 const router = require('express').Router();
 
 const {user, render} = require('../../controllers');
-const {userMiddleware, checkAccessTakenMiddleware} = require('../../middleware');
+const {userMiddleware, authMiddleware, filesMiddleware} = require('../../middleware');
 
 router.get('/', render.registerUser);
 
 router.post(
     '/', 
     userMiddleware.checkUserValidityMiddleware, 
+    filesMiddleware.checkFileMiddleware,
+    filesMiddleware.checkUserFilesCountMiddleware,
     user.createUser
 );
 
@@ -20,14 +22,14 @@ router.get(
 router.patch(
     '/:userId', 
     userMiddleware.isUserPresentMiddleware, 
-    checkAccessTakenMiddleware, 
+    authMiddleware.checkAccessTakenMiddleware, 
     user.updateUser
 );
 
 router.delete(
     '/:userId', 
     userMiddleware.isUserPresentMiddleware, 
-    checkAccessTakenMiddleware, 
+    authMiddleware.checkAccessTakenMiddleware,
     user.deleteUser
 );
 

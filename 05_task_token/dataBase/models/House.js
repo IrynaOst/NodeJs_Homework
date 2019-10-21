@@ -21,6 +21,13 @@ module.exports = (sequelize, DataTypes) => {
         price: {
             type: DataTypes.DOUBLE,
             allowNull: false
+        },
+        created_at: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.fn('now')
+        },
+        updated_at: {
+            type: DataTypes.DATE
         }
     }, {
         tableName: 'house',

@@ -5,5 +5,5 @@ module.exports = async newUser => {
     
     const newUserObj = await UserModel.create(newUser); 
 
-    return newUserObj && newUserObj.dataValues.id;
+    return newUserObj && newUserObj.dataValues && newUserObj.dataValues.id;
 }

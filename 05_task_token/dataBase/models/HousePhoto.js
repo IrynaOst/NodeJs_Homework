@@ -1,36 +1,31 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const User = sequelize.define('User', {
+    const HousePhoto = sequelize.define('HousePhoto', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        email: {
-            type: DataTypes.STRING,
-            unique: true,
+        house_id: {
+            type: DataTypes.INTEGER,
+            foreignKey: true,
             allowNull: false
         },
-        name: {
+        path: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        photo_path: {
-            type: DataTypes.STRING,
-            allowNull: true
         },
         created_at: {
             type: DataTypes.DATE,
             defaultValue: sequelize.fn('now')
         }
     }, {
-        tableName: 'user',
+        tableName: 'house_photo',
         timestamps: false
     });
     
-    return User;
+    const House = sequelize.import('./House.js');
+    HousePhoto.belongsTo(House, {foreignKey: 'house_id'});
+
+    return HousePhoto;
 }

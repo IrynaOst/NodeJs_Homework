@@ -1,4 +1,4 @@
-const {tokenVerificator} = require('../helpers')
+const {tokenVerificator} = require('../../helpers');
 
 module.exports = (req, res, next) => {
     try {

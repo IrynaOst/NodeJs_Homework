@@ -1,0 +1,1 @@
+module.exports.checkAccessTakenMiddleware = require('./checkAccessTaken.middleware');
