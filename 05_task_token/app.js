@@ -1,12 +1,14 @@
 const express = require('express');
 const expHbr =require('express-handlebars');
 const path = require('path');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
 const db = require('./dataBase').getInstance();
 db.setModels();
 
+app.use(fileUpload());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'static')));
