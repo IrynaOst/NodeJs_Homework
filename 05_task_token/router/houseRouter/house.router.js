@@ -20,15 +20,15 @@ router.get(
 
 router.patch(
     '/:houseId', 
-    houseMiddleware.isHousePresentMiddleware,
     authMiddleware.checkAccessTakenMiddleware,
+    houseMiddleware.isHousePresentMiddleware,
     house.updateHouse
 );
 
 router.delete(
     '/:houseId', 
-    houseMiddleware.isHousePresentMiddleware, 
     authMiddleware.checkAccessTakenMiddleware,
+    houseMiddleware.isHousePresentMiddleware,
     house.deleteHouse
 );
 

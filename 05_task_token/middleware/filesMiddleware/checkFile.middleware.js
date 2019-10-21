@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     req.photos = [];
     req.docs = [];
 
-    if(!(req.files)) {
+    if(!req.files) {
         next();
     }
 
@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
 
            if (filesCheck.MAX_PHOTO_SIZE < size) {
                 return next(new ErrorHendler(
-                    `Max file size is ${filesCheck.MAX_PHOTO_SIZE}mb`, 
+                    `Max file size is ${filesCheck.MAX_PHOTO_SIZE / (1024 * 1024)}mb`, 
                     400, 
                     'photoFileChecker')
                 );

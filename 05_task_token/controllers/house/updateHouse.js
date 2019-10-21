@@ -1,4 +1,5 @@
 const {houseService} = require('../../service');
+const {userValidator} = require('../../validators');
   
 module.exports = async (req, res) => {
     try {
@@ -7,9 +8,7 @@ module.exports = async (req, res) => {
         const {id} = req.user;
         const {user_id} = req.house;
 
-        if (+user_id !== id) {
-            throw new Error('It not your house. Go out!');
-        }
+        userValidator.isUseIdVeritableValidator(user_id, id);
 
         await houseService.updateHouseByParams({id: houseId}, houseToUpdate);
 

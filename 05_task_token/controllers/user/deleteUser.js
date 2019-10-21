@@ -1,13 +1,12 @@
 const {userService} = require('../../service');
+const {userValidator} = require('../../validators')
 
 module.exports = async (req, res) => {
     try {
         const {userId} = req.params;
         const {id} = req.user;
 
-        if (+userId !== id) {
-            throw new Error('It not your user');
-        }
+        userValidator.isUseIdVeritableValidator(userId, id);
 
         await userService.deleteUserById(userId);
       

@@ -29,7 +29,6 @@ module.exports = async (req, res) => {
         await emailService.sendEmail(userToCreate.email);
        
         res.redirect(`users/${userId}`);
-
     } catch (e) {
         res.json(e.message);
     }

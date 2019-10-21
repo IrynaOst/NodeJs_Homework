@@ -1,6 +1,6 @@
 const createUser = require('./createUser');
 const getById = require('./getById');
-const authUser = require('./authUser');
+const authUser = require('../auth/authUser');
 const updateUser = require('./updateUser');
 const getUserWithHouseById = require('./getUserWithHouseById');
 const deleteUser = require('./deleteUser');

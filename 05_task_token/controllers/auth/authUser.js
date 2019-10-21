@@ -1,4 +1,4 @@
-const {tokinazer} = require('../../helpers')
+const {tokinazer} = require('../../helpers');
 
 module.exports = (req, res) => {
     try {

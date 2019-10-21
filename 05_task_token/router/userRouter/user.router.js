@@ -21,15 +21,15 @@ router.get(
 
 router.patch(
     '/:userId', 
-    userMiddleware.isUserPresentMiddleware, 
     authMiddleware.checkAccessTakenMiddleware, 
+    userMiddleware.isUserPresentMiddleware, 
     user.updateUser
 );
 
 router.delete(
     '/:userId', 
+    authMiddleware.checkAccessTakenMiddleware, 
     userMiddleware.isUserPresentMiddleware, 
-    authMiddleware.checkAccessTakenMiddleware,
     user.deleteUser
 );
 

@@ -5,8 +5,7 @@ module.exports = async (req, res) => {
         const houseToCreate = req.body;
         const {id} = req.user;
 
-        const results = await houseService.createNewHouse(houseToCreate, id);
-        const houseId = results;
+        const {houseId} = await houseService.createNewHouse(houseToCreate, id);
 
         res.redirect(`houses/${houseId}`);
     } catch (e) {
