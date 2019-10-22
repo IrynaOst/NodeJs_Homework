@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
         const houseToCreate = req.body;
         const {id} = req.user;
         const photos = req.photos;
+        const docs = req.docs;
         const appRoot = global.appRoot;
 
         const houseId = await houseService.createNewHouse(houseToCreate, id);
@@ -27,6 +28,18 @@ module.exports = async (req, res) => {
 
             await photos[i].mv(resolve(appRoot, 'static', photoDir, photoName));
             await houseService.uploadHousePhotos({house_id: houseId, path: `${photoDir}/${photoName}`})
+        }
+
+        const docDir = `user/${id}/house/${houseId}/docs`;
+        await fs.mkdirSync(resolve(appRoot, 'static', docDir), {recursive: true});
+        
+        for (let i = 0; i < docs.length; i++) {
+            const docExtension = docs[i].name.split('.').pop();
+            const roundomName = uuid();
+            const docName = `${roundomName}.${docExtension}`;
+
+            await docs[i].mv(resolve(appRoot, 'static', docDir, docName));
+            await houseService.uploadHouseDocs({house_id: houseId, path: `${docDir}/${docName}`})
         }
 
         res.redirect(`houses/${houseId}`);
