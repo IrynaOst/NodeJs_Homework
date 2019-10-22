@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
         const isUserPresent = await userService.getById(userId);
 
         if (!isUserPresent) {
-            throw new Error(`User with ID ${userId} is not present`);
+            throw new Error(`Such user is not present`);
         }
 
         req.user = isUserPresent;

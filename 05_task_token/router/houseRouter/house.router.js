@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {house, render} = require('../../controllers');
-const {houseMiddleware, authMiddleware} = require('../../middleware');
+const {houseMiddleware, authMiddleware, filesMiddleware} = require('../../middleware');
 
 router.get('/', render.createHouse);
 
@@ -9,6 +9,7 @@ router.post(
     '/', 
     houseMiddleware.checkHouseValidityMiddleware, 
     authMiddleware.checkAccessTakenMiddleware,
+    filesMiddleware.checkFileMiddleware,
     house.createHouse
 );
 

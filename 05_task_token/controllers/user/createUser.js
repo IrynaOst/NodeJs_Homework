@@ -21,9 +21,7 @@ module.exports = async (req, res) => {
         const photoName = `${uuid}.${photoExtension}`;
 
         await fs.mkdirSync(resolve(appRoot, 'static', photoDir), {recursive: true});
-
         await photo.mv(resolve(appRoot, 'static', photoDir, photoName));
-
         await userService.updateUserByParams({id: userId}, {photo_path: `${photoDir}/${photoName}`});
 
         await emailService.sendEmail(userToCreate.email);

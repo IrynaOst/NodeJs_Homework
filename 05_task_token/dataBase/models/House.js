@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: sequelize.fn('now')
         },
         updated_at: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            defaultValue: sequelize.fn('now')
         }
     }, {
         tableName: 'house',

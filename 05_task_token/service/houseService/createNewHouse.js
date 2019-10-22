@@ -12,5 +12,5 @@ module.exports = async (newHouse, userId) => {
         price: price
     }); 
 
-    return newHouseObj && newHouseObj.dataValues.id;
+    return newHouseObj && newHouseObj.dataValues && newHouseObj.dataValues.id;
 }
