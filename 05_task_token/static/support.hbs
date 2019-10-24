@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Support</title>
+    <style>
+    *{ 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+    }
+    body{ 
+        font: 13px Helvetica, Arial; 
+    }
+    input{ 
+        padding: 10px; 
+        margin-top: 10px;
+        width: 90%; 
+        border: 1.5px solid rgb(37, 37, 37); 
+    }
+    button{ 
+        width: 9%; 
+        margin-top: 10px;
+        background: rgb(154, 206, 134); 
+        border: 1.5px solid rgb(128, 128, 128); 
+        padding: 10px; 
+    }
+    img{
+        width: 250px;
+        height: 100px;
+    }
+
+    </style>
+</head>
+<body> 
+
+    <button id="joinroom">JOIN ROOM</button>
+    <img src="https://www.dmxzone.com/downloads/images/GetSupport2_1.png" alt="support">
+
+    <input type="text" id="text_to_room"/>
+    <button id="btn_to_room">SEND TO ROOM</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+
+        const socket = io();
+        
+        const btn_to_room = document.getElementById('btn_to_room');
+        const text_to_room = document.getElementById('text_to_room');
+        const joinroom = document.getElementById('joinroom');
+
+        btn_to_room.onclick = () => {
+            socket.emit('msg', text_to_room.value);
+            text_to_room.value = '';
+        }
+
+        joinroom.onclick = () => {
+            socket.emit('joinroom', {room_id:'007'});
+        }
+
+        socket.on('msg_resp', data => {
+            const divka = document.createElement('div');
+
+            divka.innerText = `User: ${data.id} \n Message: ${data}`;
+
+            divka.style.border = `1.5px solid blue`;
+            divka.style.width = `90%`;
+            divka.style.padding = `5px`;
+            divka.style.marginTop = `5px`;
+
+            document.body.appendChild(divka);
+        })
+
+    </script>
+
+    
+</body>
+</html>

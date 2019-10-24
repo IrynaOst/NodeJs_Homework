@@ -4,6 +4,7 @@ const registerUser = require('./registerUser');
 const profileUser = require('./profileUser');
 const createHouse = require('./createHouse');
 const profileHouse = require('./profileHouse');
+const support = require('./support');
 
 module.exports = {
     main,
@@ -12,4 +13,5 @@ module.exports = {
     profileUser,
     createHouse,
     profileHouse,
+    support
 }
