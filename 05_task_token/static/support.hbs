@@ -11,15 +11,18 @@
         padding: 0; 
         box-sizing: border-box; 
     }
+    
     body{ 
         font: 13px Helvetica, Arial; 
     }
+
     input{ 
         padding: 10px; 
         margin-top: 10px;
         width: 90%; 
         border: 1.5px solid rgb(37, 37, 37); 
     }
+
     button{ 
         width: 9%; 
         margin-top: 10px;
@@ -27,11 +30,11 @@
         border: 1.5px solid rgb(128, 128, 128); 
         padding: 10px; 
     }
+
     img{
         width: 250px;
         height: 100px;
     }
-
     </style>
 </head>
 <body>
@@ -47,8 +50,9 @@
         const moveToAuth = () => window.location.href = "/auth";
 
         let token = localStorage.getItem('access_token');
-        if (!token)
+        if (!token) {
             moveToAuth();
+        }
 
         const socket = io();
         
@@ -75,19 +79,17 @@
         });
 
         socket.on('msg_resp', data => {
-            const divka = document.createElement('div');
+            const msgBlock = document.createElement('div');
 
-            divka.innerText = `User: ${data.userName} \n Message: ${data.message}`;
+            msgBlock.innerText = `User: ${data.userName} \n Message: ${data.message}`;
 
-            divka.style.border = `1.5px solid blue`;
-            divka.style.width = `90%`;
-            divka.style.padding = `5px`;
-            divka.style.marginTop = `5px`;
+            msgBlock.style.border = `1.5px solid blue`;
+            msgBlock.style.width = `90%`;
+            msgBlock.style.padding = `5px`;
+            msgBlock.style.marginTop = `5px`;
 
-            document.body.appendChild(divka);
+            document.body.appendChild(msgBlock);
         });
     </script>
-
-    
 </body>
 </html>
