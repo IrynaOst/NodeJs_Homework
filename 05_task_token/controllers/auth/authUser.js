@@ -3,10 +3,10 @@ const {tokinazer} = require('../../helpers');
 module.exports = (req, res) => {
     try {
         const user = req.user;
-        const tokens = tokinazer(user);
+        const token = tokinazer(user);
 
-        res.json(tokens);
+        res.render('success-login', token);
     } catch (e) {
         res.status(400).json(e.message);
-    }   
+    }
 }

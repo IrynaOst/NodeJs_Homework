@@ -10,7 +10,7 @@ const io = require('socket.io')(http);
 
 
 io.on('connection', socket => {
-    let userName = 'Guest';
+    let userName;
     let roomId;
     socket.on('joinroom', data => {
         try {
@@ -19,7 +19,7 @@ io.on('connection', socket => {
             roomId = data.room_id;
             socket.join(roomId);
         } catch (e) {
-            console.log(e.message);
+            socket.emit('unauthorized', e.message);
         }
     });
 

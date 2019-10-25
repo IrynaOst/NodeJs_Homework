@@ -35,7 +35,6 @@
     </style>
 </head>
 <body>
-    <input type="text" id="token-input"/>
     <button id="joinroom">ASK US</button>
     <img src="https://www.dmxzone.com/downloads/images/GetSupport2_1.png" alt="support">
 
@@ -45,12 +44,17 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
+        const moveToAuth = () => window.location.href = "/auth";
+
+        let token = localStorage.getItem('access_token');
+        if (!token)
+            moveToAuth();
+
         const socket = io();
         
         const btn_to_room = document.getElementById('btn_to_room');
         const text_to_room = document.getElementById('text_to_room');
         const joinroom = document.getElementById('joinroom');
-        const token = document.getElementById('token-input');
 
         btn_to_room.onclick = () => {
             socket.emit('msg', text_to_room.value);
@@ -61,9 +65,14 @@
             const room_id = Math.floor(Math.random() * 1000) + 1;
             socket.emit('joinroom', {
                 room_id,
-                token: token.value
+                token
             });
-        }
+        };
+
+        socket.on('unauthorized', errorMsg => {
+            confirm(errorMsg);
+            moveToAuth();
+        });
 
         socket.on('msg_resp', data => {
             const divka = document.createElement('div');
@@ -76,8 +85,7 @@
             divka.style.marginTop = `5px`;
 
             document.body.appendChild(divka);
-        })
-
+        });
     </script>
 
     
