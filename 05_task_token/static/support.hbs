@@ -34,9 +34,9 @@
 
     </style>
 </head>
-<body> 
-
-    <button id="joinroom">JOIN ROOM</button>
+<body>
+    <input type="text" id="token-input"/>
+    <button id="joinroom">ASK US</button>
     <img src="https://www.dmxzone.com/downloads/images/GetSupport2_1.png" alt="support">
 
     <input type="text" id="text_to_room"/>
@@ -45,12 +45,12 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
-
         const socket = io();
         
         const btn_to_room = document.getElementById('btn_to_room');
         const text_to_room = document.getElementById('text_to_room');
         const joinroom = document.getElementById('joinroom');
+        const token = document.getElementById('token-input');
 
         btn_to_room.onclick = () => {
             socket.emit('msg', text_to_room.value);
@@ -58,13 +58,17 @@
         }
 
         joinroom.onclick = () => {
-            socket.emit('joinroom', {room_id:'007'});
+            const room_id = Math.floor(Math.random() * 1000) + 1;
+            socket.emit('joinroom', {
+                room_id,
+                token: token.value
+            });
         }
 
         socket.on('msg_resp', data => {
             const divka = document.createElement('div');
 
-            divka.innerText = `User: ${data.id} \n Message: ${data}`;
+            divka.innerText = `User: ${data.userName} \n Message: ${data.message}`;
 
             divka.style.border = `1.5px solid blue`;
             divka.style.width = `90%`;

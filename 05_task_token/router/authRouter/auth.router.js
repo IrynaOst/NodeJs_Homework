@@ -1,13 +1,13 @@
 const router = require('express').Router();
 
 const {auth, render} = require('../../controllers');
-const {userMiddleware} = require('../../middleware');
+const {authMiddleware} = require('../../middleware');
 
 router.get('/', render.auth);
 
 router.post(
     '/users', 
-    userMiddleware.authUserMiddleware, 
+    authMiddleware.authUserMiddleware,
     auth.authUser
 );
 

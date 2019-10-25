@@ -1,15 +1,16 @@
-const {userService} = require('../../service');
+const {authService} = require('../../service');
 
 module.exports = async (req, res, next) => {
     try {
         const {email, password} = req.body;
-        const foundUser = await userService.authUser(email, password);
+        const foundUser = await authService.authUser(email, password);
         
         if (!foundUser) {
             throw new Error ('Invalid email or password');
         }
 
         req.user = foundUser;
+        //global.userName = foundUser.name;
 
         next();
     } catch (e) {

@@ -2,21 +2,30 @@ const express = require('express');
 const expHbr = require('express-handlebars');
 const path = require('path');
 const fileUpload = require('express-fileupload');
+const {tokenVerificator} = require('./helpers');
 
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-io.on('connection', socket => {
 
-    socket.on('msg', data => {
-        io.to('007').emit('msg_resp', data);
+io.on('connection', socket => {
+    let userName = 'Guest';
+    let roomId;
+    socket.on('joinroom', data => {
+        try {
+            let user = tokenVerificator(data.token);
+            userName = user.name;
+            roomId = data.room_id;
+            socket.join(roomId);
+        } catch (e) {
+            console.log(e.message);
+        }
     });
 
-    socket.on('joinroom', data => {
-        console.log(data);
-        socket.join(data.room_id);
-    })
+    socket.on('msg', message => {
+        io.to(roomId).emit('msg_resp', {userName, message});
+    });
 });
 
 const db = require('./dataBase').getInstance();
@@ -39,7 +48,6 @@ app.set('views', path.join(__dirname, 'static'));
 
 const {render} = require('./controllers');
 const {userRouter, houseRouter, authRouter} = require('./router');
-const {supportSettings} = require('./support')
 
 app.get('/', render.main);
 app.get('/profile', render.profileUser);
