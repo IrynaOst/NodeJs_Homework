@@ -3,7 +3,7 @@ import { Deputy } from "./Deputy.model";
 
 export class VerhovnaRada {
     factions: Faction[] = [];
-
+    
     constructor(factions: Faction[] = []) {
         this.factions = factions;
     }

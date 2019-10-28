@@ -25,12 +25,12 @@ export class Deputy extends Person {
     }
 
     takeBribe(sizeBribe: number): void {
-        
+
         if (!this.bribeTaker) {
             console.log(`${this.name}: No, I'am honest deputy and I never take this bribe`);
             return;
         }
-
+        
         console.log(`${this.name}: Give it! Faster!!`);
         (sizeBribe <= this.sizeBribe) ? console.log('Give it! Faster!!Haha') : console.log('I need to think');
     }
