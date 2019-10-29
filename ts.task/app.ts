@@ -40,7 +40,7 @@ vr.addFaction(slugiZ);
 // vr.addDepytyToFaction(holos, viktor);
 // vr.printAllDeputiesInFaction(holos);
 // vr.printMaxBribeTakerInFaction(slugiZ);
-// vr.printMaxBribeTakerInVR(vr.factions);
+vr.printMaxBribeTakerInVR();
 
 
 

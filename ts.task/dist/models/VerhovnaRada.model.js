@@ -45,21 +45,13 @@ class VerhovnaRada {
         console.log(maxBribeTaker);
     }
     ;
-    printMaxBribeTakerInVR(factions) {
-        let maxTaker = null;
-        for (let i = 0; i < factions.length; i++) {
-            for (let j = 0; j < factions[i].deputies.length; j++) {
-                let dept = factions[i].deputies[j];
-                if (maxTaker == null && dept.bribeTaker) {
-                    maxTaker = dept;
-                    continue;
-                }
-                if (dept.sizeBribe > maxTaker.sizeBribe) {
-                    maxTaker = dept;
-                }
-            }
-        }
-        console.log(maxTaker);
+    printMaxBribeTakerInVR() {
+        const allDeputies = [];
+        this.factions.forEach((fac) => {
+            fac.deputies.forEach(depyty => allDeputies.push(depyty));
+        });
+        const [maxBribeTakerInVR] = allDeputies.sort((el1, el2) => el2.sizeBribe - el1.sizeBribe);
+        console.log(maxBribeTakerInVR);
     }
     ;
     printAllDeputiesInFaction(faction) {
